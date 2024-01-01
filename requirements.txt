@@ -1,0 +1,11 @@
+uvicorn[standard]
+fastapi
+sqlalchemy
+bcrypt
+python-jose[cryptography]
+python-dotenv
+PyMySQL
+python-multipart
+pytz
+fastapi-utils
+pydantic-settings
