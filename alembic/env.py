@@ -18,9 +18,9 @@ sys.path.append(BASE_DIR)
 config = context.config
 
 #-----------------------add code--------------------#
-# from config.config import settings
+from config.config import DatabaseURLSettings
 
-SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{os.environ.get('DB_USER')}:{os.environ.get('DB_PASSWORD')}@{os.environ.get('DB_HOST')}:{os.environ.get('DB_PORT')}/{os.environ.get('DB_NAME')}"
+SQLALCHEMY_DATABASE_URL = DatabaseURLSettings().SQLALCHEMY_DATABASE_URL
 # this line is to overwrite the sqlachemy url in the alembic.ini file.
 config.set_main_option("sqlalchemy.url", str(SQLALCHEMY_DATABASE_URL))
 
@@ -65,6 +65,7 @@ def run_migrations_offline():
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
+        compare_type=True
     )
 
     with context.begin_transaction():
@@ -86,7 +87,7 @@ def run_migrations_online():
 
     with connectable.connect() as connection:
         context.configure(
-            connection=connection, target_metadata=target_metadata
+            connection=connection, target_metadata=target_metadata, compare_type=True
         )
 
         with context.begin_transaction():

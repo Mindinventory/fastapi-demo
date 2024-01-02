@@ -1,15 +1,14 @@
 from contextlib import contextmanager
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
-@contextmanager
-def SqlAlchemyUnitOfWork():
-    from sqlalchemy import create_engine
-    from sqlalchemy.orm import sessionmaker
-    from config.config import settings
+from config.config import DatabaseURLSettings
 
-    SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{settings.DB_USER}:{settings.DB_PASSWORD}@{settings.DB_HOST}:{settings.DB_PORT}/{settings.DB_NAME}"
-    engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_size=100, max_overflow=200, pool_recycle=300)
+engine = create_engine(DatabaseURLSettings().SQLALCHEMY_DATABASE_URL)
+Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-    Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+def get_db():
     db = Session()
     try:
         yield db
