@@ -1,7 +1,8 @@
-import os
-import json
+import os, json
+
 from fastapi.responses import JSONResponse
-from .. import logger
+
+from config.logger import logger
 
 
 def success_response(data, message, code=200, **extra):
@@ -21,6 +22,7 @@ def error_response(message, code=400):
         "message": message,
         "code": code
     }
+    logger.error(message)
     return JSONResponse(
         res,
         status_code=code
