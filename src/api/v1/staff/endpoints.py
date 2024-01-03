@@ -1,11 +1,12 @@
-from fastapi import APIRouter, Security, Request, Depends
+from fastapi import APIRouter, Depends, Security
 from sqlalchemy.orm import Session
-from fastapi.encoders import jsonable_encoder
 
 from . import schema
 from . import crud
 from config.logger import logger
 from ....db.session import get_db
+from ....general.constant import STAFF
+from ....general.auth_utils import get_current_user
 from ....general.response import success_response, error_response, get_message
 
 
@@ -13,13 +14,15 @@ router = APIRouter()
 
 
 @router.get("/{staff_id}")
-def get_staff_details(staff_id: str, db: Session = Depends(get_db)):
+def get_staff_details(staff_id: str, db: Session = Depends(get_db),
+                      user: dict = Security(get_current_user, scopes=[STAFF])):
     """
     Get staff details
     """
-    try:
-        staff = crud.get_staff_details(db=db, staff_id=staff_id)
-        return success_response(staff, "Staff details retrieved successfullly")
+    try: 
+        staff = crud.get_staff_details(db=db, staff_id=staff_id)        
+        staff_data = schema.StaffDetails(**staff._mapping)
+        return success_response(staff_data, "Staff details retrieved successfullly")
     except Exception as e:
         logger.error(f"Internal server error: {e.args}")
         return error_response(get_message("internal_server", "internal"), 500)

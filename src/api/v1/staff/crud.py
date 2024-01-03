@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import select
 from uuid import uuid4
 
 from ..auth.models import User, UserProfile
@@ -29,8 +30,10 @@ def create_staff(db: Session, input_data: schema.CreateUser):
 
 def get_staff_details(db: Session, staff_id: str):
     staff = db.query(
+        User.username, UserProfile.first_name
+    ).join(
         UserProfile
     ).filter(
-        UserProfile.user_id == staff_id
+        User.id == staff_id
     )
     return staff.first()
