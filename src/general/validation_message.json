@@ -1,4 +1,17 @@
 {
+    "auth_login": {
+        "scope_greater": "Please select single scope",
+        "scope_lesser": "Please select a scope",
+        "invalid_scope": "Invalid scope selected",
+        "staff_scope": "This position is not allowed to login on owner portal",
+        "invalid_credential": "Invalid login credentials",
+        "email_not_verified": "Please verify your email",
+        "forbidden_access": "Forbidden access",
+        "username_missing": "Please enter the username",
+        "password_missing": "Please enter the password",
+        "is_owner_missing": "Please pass the is_owner field",
+        "no_social_account": "No user found with this email"
+    },
     "internal_server": {
         "internal": "Internal server error"
     }

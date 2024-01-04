@@ -1,13 +1,14 @@
 from sqlalchemy import Column, String, Boolean, DateTime, ForeignKey
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
+from uuid import uuid4
 
 from ....db.base import Base
 
 
 class User(Base):
     __tablename__ = "users"
-    id = Column(String(40), primary_key=True, index=True)
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid4()), unique=True, nullable=False)
     username = Column(String(60), unique=True, nullable=False)
     password = Column(String(100), nullable=False)
     profile_picture = Column(String(100))
@@ -26,7 +27,7 @@ class User(Base):
 
 class UserProfile(Base):
     __tablename__ = "user_profile"
-    id = Column(String(60), primary_key=True, index=True)
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid4()), unique=True, nullable=False)
     user_id = Column(String(40), ForeignKey("users.id"), nullable=False)
     email = Column(String(60), unique=True, nullable=False)
     first_name = Column(String(50), nullable=False)

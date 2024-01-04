@@ -1,9 +1,9 @@
-from pydantic import BaseModel, Field, ConfigDict, RootModel
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional
 
 
 class CreateUser(BaseModel):
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True, str_strip_whitespace=True)
     username: str
     email: str = Field(max_length=60, pattern="([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(.[A-Z|a-z]{2,})+")
     profile_picture: Optional[str] = None
@@ -17,3 +17,9 @@ class CreateUser(BaseModel):
     state : Optional[str] = None
     country : Optional[str] = None
     postal_code : Optional[str] = None
+
+
+class StaffDetails(BaseModel):
+    model_config = ConfigDict(from_attributes=True, extra="ignore")
+    username: str
+    first_name: str
