@@ -2,13 +2,13 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm
 
-from . import crud
 from config.logger import logger
-from ....db.session import get_db
-from ....general.constant import *
-from ....general.hash_utils import Hasher
-from ....general.token_utils import Token
-from ....general.response import error_response, get_message
+from src.api.v1.auth import crud
+from src.db.session import get_db
+from src.general.constant import PATIENT, STAFF, OWNER, ADMIN
+from src.general.hash_utils import Hasher
+from src.general.token_utils import Token
+from src.general.response import error_response, get_message
 
 
 router = APIRouter()

@@ -1,13 +1,12 @@
 from fastapi import APIRouter, Depends, Security
 from sqlalchemy.orm import Session
 
-from . import schema
-from . import crud
 from config.logger import logger
-from ....db.session import get_db
-from ....general.constant import STAFF
-from ....general.auth_utils import get_current_user
-from ....general.response import success_response, error_response, get_message
+from src.api.v1.staff import schema, crud
+from src.db.session import get_db
+from src.general.constant import STAFF
+from src.general.auth_utils import get_current_user
+from src.general.response import success_response, error_response, get_message
 
 
 router = APIRouter()

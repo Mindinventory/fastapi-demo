@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from .models import User
+from src.api.v1.auth.models import User
 
 
 def get_user(db: Session, username: str):

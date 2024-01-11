@@ -3,7 +3,7 @@ from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from uuid import uuid4
 
-from ....db.base import Base
+from src.db.base import Base
 
 
 class User(Base):
