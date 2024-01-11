@@ -1,6 +1,6 @@
 import bcrypt
 
-from .response import error_response, get_message
+from src.general.response import error_response, get_message
 from config.logger import logger
 
 

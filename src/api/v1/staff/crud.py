@@ -1,10 +1,8 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import select
-from uuid import uuid4
 
-from ..auth.models import User, UserProfile
-from . import schema
-from ....general.helper import get_hash_password
+from src.api.v1.auth.models import User, UserProfile
+from src.api.v1.staff import schema
+from src.general.helper import get_hash_password
 
 
 def create_staff(db: Session, input_data: schema.CreateUser):

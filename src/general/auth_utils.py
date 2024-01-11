@@ -1,13 +1,11 @@
 from fastapi import Depends, status, HTTPException
-from fastapi.security import OAuth2PasswordBearer, SecurityScopes
+from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError
 from sqlalchemy.orm import Session
 
-# from src.api.v1.user_authentication.models.user_models import User
-# from src.api.v1.user_authentication.schemas.user_schemas import UserResponseSchema, RoleChoices
-from ..api.v1.auth import crud
-from ..general.constant import scopes_list
-from ..db.session import get_db
+from src.api.v1.auth import crud
+from src.general.constant import scopes_list
+from src.db.session import get_db
 from config.config import JWTSettings
 
 

@@ -1,6 +1,5 @@
 import logging.config
 
-print("Loading default log config.")
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -33,4 +32,4 @@ LOGGING = {
 
 logging.config.dictConfig(LOGGING)
 logger = logging.getLogger("app")
-print("Initialized", logger)
+logger.info(f"Initialized {logger}")
