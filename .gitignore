@@ -3,5 +3,6 @@ __pycache__/
 *$py.class
 
 .env
-alembic/versions/*
 venv
+alembic/versions/*
+!alembic/versions/.gitkeep
